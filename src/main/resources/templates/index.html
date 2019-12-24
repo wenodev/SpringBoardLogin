@@ -5,6 +5,9 @@
     <title>메인</title>
 </head>
 <body>
+<div th:insert="common/header.html" id="header"></div>
+
+
 <h1>메인 페이지</h1>
 <hr>
 <a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
