@@ -1,23 +1,28 @@
 package com.example.loginsecurity.controller;
 
 
+import com.example.loginsecurity.dto.BoardDto;
 import com.example.loginsecurity.dto.MemberDto;
+import com.example.loginsecurity.service.BoardService;
 import com.example.loginsecurity.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class MemberController {
-       private MemberService memberService;
+    private MemberService memberService;
+    private BoardService boardService;
 
     // 메인 페이지
-    @GetMapping("/")
-    public String index() {
-        return "/index";
-    }
+//    @GetMapping("/")
+//    public String index() {
+//        return "/index";
+//    }
 
     // 회원가입 페이지
     @GetMapping("/user/signup")
@@ -68,4 +73,6 @@ public class MemberController {
     public String dispAdmin() {
         return "/admin";
     }
+
+
 }

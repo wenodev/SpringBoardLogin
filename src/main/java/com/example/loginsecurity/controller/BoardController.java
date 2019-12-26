@@ -21,18 +21,18 @@ public class BoardController {
 
 
     /* 게시글 목록 */
-    @GetMapping("/board")
+    @GetMapping("/")
     public String list(Model model) {
         List<BoardDto> boardList = boardService.getBoardlist();
 
         model.addAttribute("boardList", boardList);
-        return "/list.html";
+        return "/board/list.html";
     }
 
 
     @GetMapping("/post")
     public String write(){
-        return "/write.html";
+        return "/board/write.html";
     }
 
     @GetMapping("/post/{no}")
@@ -40,7 +40,7 @@ public class BoardController {
         BoardDto boardDTO = boardService.getPost(no);
 
         model.addAttribute("boardDto", boardDTO);
-        return "/detail.html";
+        return "/board/detail.html";
     }
 
     @GetMapping("/post/edit/{no}")
@@ -48,7 +48,7 @@ public class BoardController {
         BoardDto boardDTO = boardService.getPost(no);
 
         model.addAttribute("boardDto", boardDTO);
-        return "/update.html";
+        return "/board/update.html";
     }
 
     @PostMapping("/post")
