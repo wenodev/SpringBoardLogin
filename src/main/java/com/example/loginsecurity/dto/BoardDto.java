@@ -1,6 +1,7 @@
 package com.example.loginsecurity.dto;
 
 import com.example.loginsecurity.domain.entity.BoardEntity;
+import com.example.loginsecurity.domain.entity.MemberEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,6 @@ public class BoardDto {
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private Long memberId;
 
     public BoardEntity toEntity(){
         BoardEntity build = BoardEntity.builder()
@@ -27,19 +27,17 @@ public class BoardDto {
                 .content(content)
                 .createdDate(createdDate)
                 .createdDate(modifiedDate)
-                .memberId(memberId)
                 .build();
         return build;
     }
 
     @Builder
-    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate, Long memberId) {
+    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.writer = writer;
         this.title = title;
         this.content = content;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
-        this.memberId = memberId;
     }
 }

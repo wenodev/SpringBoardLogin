@@ -21,13 +21,17 @@ public class MemberDto {
                 .id(id)
                 .email(email)
                 .password(password)
+                .createDate(createdDate)
+                .modifiedDate(modifiedDate)
                 .build();
     }
 
     @Builder
-    public MemberDto(Long id, String email, String password) {
+    public MemberDto(Long id, String email, String password, LocalDateTime createdDate,  LocalDateTime modifiedDate) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 }
