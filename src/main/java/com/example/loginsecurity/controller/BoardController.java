@@ -1,8 +1,13 @@
 package com.example.loginsecurity.controller;
 
+import com.example.loginsecurity.domain.entity.MemberEntity;
 import com.example.loginsecurity.dto.BoardDto;
 import com.example.loginsecurity.service.BoardService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +29,23 @@ public class BoardController {
     @GetMapping("/")
     public String list(Model model) {
         List<BoardDto> boardList = boardService.getBoardlist();
-
         model.addAttribute("boardList", boardList);
+
+
         return "/board/list.html";
     }
 
 
     @GetMapping("/post")
     public String write(){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        System.out.println("name : " + auth.getName() );
+        System.out.println("class : " + auth.getClass() );
+        System.out.println("tostring : " + auth.toString() );
+        System.out.println("getDetails : " + auth.getDetails() );
+
         return "/board/write.html";
     }
 
@@ -53,8 +67,10 @@ public class BoardController {
 
     @PostMapping("/post")
     public String write(BoardDto boardDto){
-        boardService.savePost(boardDto);
 
+
+        
+        boardService.savePost(boardDto);
         return "redirect:/";
     }
 

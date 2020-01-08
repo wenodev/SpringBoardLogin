@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
+@Table
+@ToString(exclude = {"memberEntity"})
 public class BoardEntity {
 
     @Id
@@ -17,21 +19,22 @@ public class BoardEntity {
     private String writer;
     private String title;
     private String content;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
     private LocalDateTime modifiedDate;
 
 
 
-
-
+    // Order N : 1 User
+    @ManyToOne
+    private MemberEntity memberEntity;
 
     @Builder
-    public BoardEntity(Long id, String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardEntity(Long id, String title, String content, String writer, LocalDateTime createDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.writer = writer;
         this.title = title;
         this.content = content;
-        this.createdDate = createdDate;
+        this.createDate = createDate;
         this.modifiedDate = modifiedDate;
 
     }

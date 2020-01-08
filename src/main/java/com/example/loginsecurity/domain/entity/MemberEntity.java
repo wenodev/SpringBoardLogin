@@ -11,8 +11,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table
-
-
+@ToString(exclude = {"boardEntityList"})
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -25,19 +24,20 @@ public class MemberEntity {
     private String password;
 
     @Column
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Column
     private LocalDateTime modifiedDate;
 
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "memberEntity")
+    private List<BoardEntity> boardEntityList;
 
     @Builder
     public MemberEntity(Long id, String email, String password, LocalDateTime createDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.createdDate = createDate;
+        this.createDate = createDate;
         this.modifiedDate = modifiedDate;
 
     }

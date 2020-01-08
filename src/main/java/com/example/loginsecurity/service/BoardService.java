@@ -2,8 +2,12 @@ package com.example.loginsecurity.service;
 
 import com.example.loginsecurity.domain.entity.BoardEntity;
 import com.example.loginsecurity.domain.repository.BoardRepository;
+import com.example.loginsecurity.domain.repository.MemberRepository;
 import com.example.loginsecurity.dto.BoardDto;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,10 +21,16 @@ public class BoardService {
 
     private BoardRepository boardRepository;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
+
+
     @Transactional
     public List<BoardDto> getBoardlist() {
         List<BoardEntity> boardEntities = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
+
 
         for ( BoardEntity boardEntity : boardEntities) {
             BoardDto boardDTO = BoardDto.builder()
@@ -28,7 +38,7 @@ public class BoardService {
                     .title(boardEntity.getTitle())
                     .content(boardEntity.getContent())
                     .writer(boardEntity.getWriter())
-                    .createdDate(boardEntity.getCreatedDate())
+                    .createDate(boardEntity.getCreateDate())
                     .build();
 
             boardDtoList.add(boardDTO);
@@ -52,7 +62,7 @@ public class BoardService {
                 .title(boardEntity.getTitle())
                 .content(boardEntity.getContent())
                 .writer(boardEntity.getWriter())
-                .createdDate(boardEntity.getCreatedDate())
+                .createDate(boardEntity.getCreateDate())
                 .build();
 
         return boardDTO;
@@ -60,6 +70,7 @@ public class BoardService {
 
     @Transactional
     public Long savePost(BoardDto boardDto) {
+
         return boardRepository.save(boardDto.toEntity()).getId();
     }
 
