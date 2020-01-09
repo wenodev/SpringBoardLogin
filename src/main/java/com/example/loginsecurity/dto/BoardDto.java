@@ -4,6 +4,7 @@ import com.example.loginsecurity.domain.entity.BoardEntity;
 import com.example.loginsecurity.domain.entity.MemberEntity;
 import lombok.*;
 
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 
@@ -19,6 +20,10 @@ public class BoardDto {
     private LocalDateTime createDate;
     private LocalDateTime modifiedDate;
 
+    // Order N : 1 User
+    @ManyToOne
+    private MemberEntity memberEntity;
+
     public BoardEntity toEntity(){
         BoardEntity build = BoardEntity.builder()
                 .id(id)
@@ -27,17 +32,21 @@ public class BoardDto {
                 .content(content)
                 .createDate(createDate)
                 .modifiedDate(modifiedDate)
+                .memberEntity(memberEntity)
                 .build();
         return build;
     }
 
     @Builder
-    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createDate, LocalDateTime modifiedDate) {
+    public BoardDto(Long id, String title, String content, String writer, LocalDateTime createDate, LocalDateTime modifiedDate, MemberEntity memberEntity) {
         this.id = id;
         this.writer = writer;
         this.title = title;
         this.content = content;
         this.createDate = createDate;
         this.modifiedDate = modifiedDate;
+        this.memberEntity = memberEntity;
     }
+
+
 }

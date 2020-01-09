@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -33,6 +34,9 @@ public class MemberController {
     // 회원가입 처리
     @PostMapping("/user/signup")
     public String execSignup(MemberDto memberDto) {
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        memberDto.setCreatedDate(localDateTime);
         memberService.joinUser(memberDto);
 
         return "redirect:/user/login";

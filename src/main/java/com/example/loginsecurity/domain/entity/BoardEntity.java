@@ -29,13 +29,14 @@ public class BoardEntity {
     private MemberEntity memberEntity;
 
     @Builder
-    public BoardEntity(Long id, String title, String content, String writer, LocalDateTime createDate, LocalDateTime modifiedDate) {
+    public BoardEntity(Long id, String title, String content, String writer, LocalDateTime createDate, LocalDateTime modifiedDate, MemberEntity memberEntity) {
         this.id = id;
         this.writer = writer;
         this.title = title;
         this.content = content;
         this.createDate = createDate;
         this.modifiedDate = modifiedDate;
+        this.memberEntity = memberEntity;
 
     }
 }

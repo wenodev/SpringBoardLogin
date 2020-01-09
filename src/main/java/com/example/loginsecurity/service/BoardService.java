@@ -1,11 +1,13 @@
 package com.example.loginsecurity.service;
 
 import com.example.loginsecurity.domain.entity.BoardEntity;
+import com.example.loginsecurity.domain.entity.MemberEntity;
 import com.example.loginsecurity.domain.repository.BoardRepository;
 import com.example.loginsecurity.domain.repository.MemberRepository;
 import com.example.loginsecurity.dto.BoardDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,9 @@ public class BoardService {
     public List<BoardDto> getBoardlist() {
         List<BoardEntity> boardEntities = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
+
+
+
 
 
         for ( BoardEntity boardEntity : boardEntities) {

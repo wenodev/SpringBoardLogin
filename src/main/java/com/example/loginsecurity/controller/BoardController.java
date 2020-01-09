@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -53,6 +54,9 @@ public class BoardController {
     public String detail(@PathVariable("no") Long no, Model model) {
         BoardDto boardDTO = boardService.getPost(no);
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("auth",auth);
+
         model.addAttribute("boardDto", boardDTO);
         return "/board/detail.html";
     }
@@ -68,14 +72,21 @@ public class BoardController {
     @PostMapping("/post")
     public String write(BoardDto boardDto){
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boardDto.setWriter(auth.getName());
 
-        
+        LocalDateTime localDateTime = LocalDateTime.now();
+        boardDto.setCreateDate(localDateTime);
+
         boardService.savePost(boardDto);
         return "redirect:/";
     }
 
     @PostMapping("/post/edit/{no}")
     public String update(BoardDto boardDTO) {
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        boardDTO.setModifiedDate(localDateTime);
         boardService.savePost(boardDTO);
 
         return "redirect:/";

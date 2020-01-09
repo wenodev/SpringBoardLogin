@@ -37,7 +37,8 @@
             <span th:text="${board.writer}"></span>
         </td>
         <td>
-            <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+<!--            <span th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></span>-->
+            <span th:text="${board.createDate}"></span>
         </td>
     </tr>
     </tbody>
